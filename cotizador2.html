@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="pcss/cotizador.css" media="screen" title="no title" charset="utf-8">
+	<script type="text/javascript" src="res/jquery.js?12-0-7-26"></script>
+	<script type="text/javascript" src="res/snap_svg.js"></script>
+	<script type="text/javascript" src="res/velocity.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+		<a href="#" class="back_link"> <img src="img/arrow.png" class="back_arrow_icon" title="" alt=""/> Go back to the tutorial</a>
+
+		<!--  start Form Steps  -->
+		<div class="steps" id="steps">
+			<span class="step_nb"></span>
+			<form action="#" method="post" autocomplete="off">
+				<ul>
+					<li class="current_step">
+						<p class="form_title">DATOS GENERALES</p>
+						
+						<input type="text" class="text_field" id="name" name="name" placeholder="INGRESE SU NOMBRE"/>
+
+					</li>
+					<li>
+						<input type="text" class="text_field" id="email" name="email" placeholder="Enter You Email"/>
+					</li>
+					<li>
+						<input type="text" class="text_field" id="age" name="age" placeholder="Enter You Age"/>
+					</li>
+					<li>
+						<input type="text" class="text_field" id="country" name="country" placeholder="Enter You Country"/>
+					</li>
+				</ul>
+			</form>
+			<span class="note">Note : you can hit "Enter" to move to next step</span>
+		</div><!--  End Form Steps  -->
+	<script type="text/javascript" src="res/cotizador.js"></script>
+</body>
+</html>
