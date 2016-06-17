@@ -3,8 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <title>Cotizador</title>
+    <link type="text/css" rel="stylesheet" href="pcss/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <script type="text/javascript" src="res/jquery.js?12-0-7-26"></script>
+      <script type="text/javascript" src="res/materialize.min.js"></script>
+
+      <style media="screen">
+          body{
+              background-color: #f7f8fa;
+          }
+      </style>
 </head>
 <body>
-    Hola menso
+        <div class="row">
+            <div class="col s12">
+                <div class="blue darken-4 s12">
+                    <h3 class="white-text center-align">
+                        Simulador OptiMaxx Plus
+                    </h3>
+                </div>
+                <form action="">
+                    <!--<div class="row"> -->
+                        <!-- Datos Generales -->
+                        <div class="col s6">
+                            <div class="card">
+                                <div class="card-content">
+                                    <span class="blue-text darken-4"><b>DATOS GENERALES</b></span>
+                                </div>
+                                <div class="card-action">
+                                    <div class="row">
+                                        <div class="input-field col s10">
+                                            <input id="name" type="text" class="validate">
+                                            <label for="name">Nombre</label>
+                                        </div>
+                                        <div class="input-field col s2">
+                                            <input id="age" type="number" class="validate" min="18" max="68">
+                                            <label for="age">Edad</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fin Datos Generales -->
+
+                        <!-- Aportaciones -->
+                        <div class="col s6">
+                            <div class="card">
+                                <div class="card-content">
+                                    <span class="blue-text darken-4"><b>APORTACIONES</b></span>
+                                </div>
+                                <div class="card-action">
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input id="aportacion" type="number" class="validate">
+                                            <label for="aportacion">Aportación</label>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <label for="periodicidad">Periodicidad</label>
+                                            <br>
+                                            <select name="periodicidad" id="periodicidad">
+                                                <option value="Mensual">Mensual</option>
+                                                <option value="Trimestral">Trimestral</option>
+                                                <option value="Semestral">Semestral</option>
+                                                <option value="Anual">Anual</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <label for="plazo">Plazo comprendido</label>
+                                            <br>
+                                            <div id="divSelectPlazo"></div>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <label for="inflacion">Incremento con inflación</label>
+                                            <br>
+                                            <select name="inflacion" id="inflacion">
+                                                <option value="Si">Si</option>
+                                                <option value="No">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fin Aportaciones -->
+                    <!--</div>-->
+                    <!--<div class="row">-->
+
+                        <!-- Caracteristicas -->
+                        <div class="col s6">
+                            <div class="card">
+                                <div class="card-content">
+                                    <span class="blue-text darken-4"><b>CARACTERISTICAS</b></span>
+                                </div>
+                                <div class="card-action">
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <label for="plan">Tipo de plan</label>
+                                            <br>
+                                            <select class="plan">
+                                                <option value="">Fideicomiso Art. 151 (Antes Art. 176)</option>
+                                                <option value="">Deducible Art. 185 (Antes Art. 218)</option>
+                                                <option value="">Art. 93 (Antes Art. 109)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <label for="isr">% ISR del cliente</label>
+                                            <br>
+                                            <select name="isr" id="isr">
+                                                <option value="10">%10</option>
+                                                <option value="15">%15</option>
+                                                <option value="20">%20</option>
+                                                <option value="25">%25</option>
+                                                <option value="30">%30</option>
+                                                <option value="32">%32</option>
+                                                <option value="34">%34</option>
+                                                <option value="35">%35</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fin Caracteristicas -->
+                        <!-- Portafolios -->
+                        <div class="col s6">
+                            <div class="card">
+                                <div class="card-content">
+                                    <span class="blue-text darken-4"><b>PROTAFOLIOS</b></span>
+                                </div>
+                                <div class="card-action">
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>Conservador</th>
+                                                        <th>Balanceado</th>
+                                                        <th>Dinámico</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Pesos</td>
+                                                        <td><input type="number" min="0" max="100" name="" value=""></td>
+                                                        <td><input type="number" min="0" max="100" name="" value=""></td>
+                                                        <td><input type="number" min="0" max="100" name="" value=""></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dólares</td>
+                                                        <td><input type="number" min="0" max="100" name="" value=""></td>
+                                                        <td><input type="number" min="0" max="100" name="" value=""></td>
+                                                        <td><input type="number" min="0" max="100" name="" value=""></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Euros</td>
+                                                        <td><input type="number" min="0" max="100" name="" value=""></td>
+                                                        <td><input type="number" min="0" max="100" name="" value=""></td>
+                                                        <td><input type="number" min="0" max="100" name="" value=""></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Revaluables</td>
+                                                        <td><input type="number" min="0" max="100" name="" value=""></td>
+                                                        <td>China</td>
+                                                        <td><input type="number" min="0" max="100" name="" value=""></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Brasil</td>
+                                                        <td><input type="number" min="0" max="100" name="" value=""></td>
+                                                        <td>Mercados Emergentes</td>
+                                                        <td><input type="number" min="0" max="100" name="" value=""></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>BRIC</td>
+                                                        <td><input type="number" min="0" max="100" name="" value=""></td>
+                                                        <td>Oro</td>
+                                                        <td><input type="number" min="0" max="100" name="" value=""></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fin Portafolios -->
+                    <!--</div> -->
+
+                    <div class="row">
+
+                        <!-- Resumen -->
+                        <div class="col s6">
+                            <div class="card">
+                                <div class="card-content">
+                                    <span class="blue-text darken-4"><b>Resumen</b></span>
+                                </div>
+                                <div class="card-action">
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input id="aportacionAcomulada" type="number" class="validate">
+                                            <label for="aportacionAcomulada">Aportaciones acomuladas</label>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <input type="number" id="saldoProyectado">
+                                            <label for="saldoProyectado">Saldo proyectado a edad <b id="edadProyectada"></b></label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input type="number" id="porcentajeBonoAcreditado">
+                                            <label for="porcentajeBonoAcreditado">% de Bono Acreditado</label>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <input type="number" id="bonoAcreditado">
+                                            <label for="bonoAcreditado">Bono Acreditado</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fin Resumen -->
+                    </div>
+
+                </form>
+            </div>
+            <div class="col s2">Allianz</div>
+        </div>
+    <script type="text/javascript" src="res/cotizador.js"></script>
 </body>
 </html>
