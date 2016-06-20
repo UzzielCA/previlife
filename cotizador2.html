@@ -3,39 +3,203 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<link rel="stylesheet" href="pcss/materialize.min.css">
 	<link rel="stylesheet" href="pcss/cotizador.css" media="screen" title="no title" charset="utf-8">
 	<script type="text/javascript" src="res/jquery.js?12-0-7-26"></script>
+
 	<script type="text/javascript" src="res/snap_svg.js"></script>
 	<script type="text/javascript" src="res/velocity.js"></script>
+	<script type="text/javascript" src="res/materialize.min.js"></script>
 </head>
 <body>
-	<div class="wrapper">
-		<a href="#" class="back_link"> <img src="img/arrow.png" class="back_arrow_icon" title="" alt=""/> Go back to the tutorial</a>
+	<div class="container">
 
-		<!--  start Form Steps  -->
-		<div class="steps" id="steps">
-			<span class="step_nb"></span>
-			<form action="#" method="post" autocomplete="off">
-				<ul>
-					<li class="current_step">
-						<p class="form_title">DATOS GENERALES</p>
-						
-						<input type="text" class="text_field" id="name" name="name" placeholder="INGRESE SU NOMBRE"/>
+		<div class="row">
+			<div class="col s12 m12 l12 ">
+				<!--  start Form Steps  -->
+				<div class="steps card " id="steps">
+					<div class="card-content">
+						<span class="blue-text darken-4">
+							<b>
+								DATOS GENERALES
+							</b>
+						</span>
+					</div>
+					<div class="card-action">
+						<fieldset class="current_step">
+							<div class="input-field">
+								<input id="name" type="text" class="validate" required="required">
+								<label for="name">Nombre</label>
+							</div>
+							<div class="input-field">
+								<input id="age" type="number" class="validate" required="required" min="18" max="68">
+								<label for="age">Edad</label>
+							</div>
+						</fieldset>
+						<fieldset>
+							<div class="input-field col s6">
+								<input id="aportacion" type="number" class="validate" required="required" min="1000" max="7500">
+								<label for="aportacion">Aportación</label>
+							</div>
+							<div class="input-field col s6">
+								<label for="periodicidad" class="label_select">Periodicidad</label>
+									<br>
+								<select name="periodicidad" id="periodicidad">
+									<option value="Mensual">Mensual</option>
+									<option value="Trimestral">Trimestral</option>
+									<option value="Semestral">Semestral</option>
+									<option value="Anual">Anual</option>
+								</select>
+							</div>
+							<div class="input-field col s6">
+								<label for="plazo">Plazo comprendido</label>
+								<br>
+								<div id="divSelectPlazo"></div>
+							</div>
+							<div class="input-field col s6">
+								<label for="inflacion">Incremento con inflación</label>
+								<br>
+								<select name="inflacion" id="inflacion">
+									<option value="Si">Si</option>
+									<option value="No">No</option>
+								</select>
+							</div>
+						</fieldset>
+						<fieldset>
+							<div class="input-field col s12">
+								<label class="label_select" for="plan">Tipo de plan</label>
+								<br>
+								<select class="plan">
+									<option value="">Fideicomiso Art. 151 (Antes Art. 176)</option>
+									<option value="">Deducible Art. 185 (Antes Art. 218)</option>
+									<option value="">Art. 93 (Antes Art. 109)</option>
+								</select>
+							</div>
+							<div class="input-field col s12">
+								<label class="label_select" for="isr">% ISR del cliente</label>
+								<br>
+								<select name="isr" id="isr">
+									<option value="10">%10</option>
+									<option value="15">%15</option>
+									<option value="20">%20</option>
+									<option value="25">%25</option>
+									<option value="30">%30</option>
+									<option value="32">%32</option>
+									<option value="34">%34</option>
+									<option value="35">%35</option>
+								</select>
+							</div>
+						</fieldset>
+						<fieldset id="portafolios">
+							<div class="input-field col s12">
+								<table>
+									<thead>
+										<tr>
+											<th></th>
+											<th>Conservador</th>
+											<th>Balanceado</th>
+											<th>Dinámico</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Pesos</td>
+											<td><input value="0" type="number" min="0" max="100" name="" value=""></td>
+											<td><input value="0" type="number" min="0" max="100" name="" value=""></td>
+											<td><input value="0" type="number" min="0" max="100" name="" value=""></td>
+										</tr>
+										<tr>
+											<td>Dólares</td>
+											<td><input value="0" type="number" min="0" max="100" name="" value=""></td>
+											<td><input value="0" type="number" min="0" max="100" name="" value=""></td>
+											<td><input value="0" type="number" min="0" max="100" name="" value=""></td>
+										</tr>
+										<tr>
+											<td>Euros</td>
+											<td><input value="0" type="number" min="0" max="100" name="" value=""></td>
+											<td><input value="0" type="number" min="0" max="100" name="" value=""></td>
+											<td><input value="0" type="number" min="0" max="100" name="" value=""></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="input-field col s12">
+								<table>
+									<tbody>
+										<tr>
+											<td>Revaluables</td>
+											<td><input value="0" type="number" min="0" max="100" name="" value=""></td>
+											<td>China</td>
+											<td><input value="0" type="number" min="0" max="100" name="" value=""></td>
+										</tr>
+										<tr>
+											<td>Brasil</td>
+											<td><input value="0" type="number" min="0" max="100" name="" value=""></td>
+											<td>Mercados Emergentes</td>
+											<td><input value="0" type="number" min="0" max="100" name="" value=""></td>
+										</tr>
+										<tr>
+											<td>BRIC</td>
+											<td><input value="0" type="number" min="0" max="100" name="" value=""></td>
+											<td>Oro</td>
+											<td><input value="0" type="number" min="0" max="100" name="" value=""></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</fieldset>
 
-					</li>
-					<li>
-						<input type="text" class="text_field" id="email" name="email" placeholder="Enter You Email"/>
-					</li>
-					<li>
-						<input type="text" class="text_field" id="age" name="age" placeholder="Enter You Age"/>
-					</li>
-					<li>
-						<input type="text" class="text_field" id="country" name="country" placeholder="Enter You Country"/>
-					</li>
-				</ul>
-			</form>
-			<span class="note">Note : you can hit "Enter" to move to next step</span>
-		</div><!--  End Form Steps  -->
+						<fieldset id="resumen">
+							<div class="input-field col s6">
+								<input id="aportacionAcomulada" type="number" class="validate">
+								<label for="aportacionAcomulada">Aportaciones acomuladas</label>
+							</div>
+							<div class="input-field col s6">
+								<input type="number" id="saldoProyectado">
+								<label for="saldoProyectado">Saldo proyectado a edad <b id="edadProyectada"></b></label>
+							</div>
+							<div class="input-field col s6">
+								<input type="number" id="porcentajeBonoAcreditado">
+								<label for="porcentajeBonoAcreditado">% de Bono Acreditado</label>
+							</div>
+							<div class="input-field col s6">
+								<input type="number" id="bonoAcreditado">
+								<label for="bonoAcreditado">Bono Acreditado</label>
+							</div>
+						</fieldset>
+						<fieldset id="detalle">
+							<table class="responsive-table bordered highlight" id="tableDetalle">
+								<tr>
+									<td>AÑO</td>
+									<td>EDAD</td>
+									<td>APORTACIÓN ANUAL</td>
+									<td>APORTACIÓN ACOMULADA</td>
+									<td>SALDO DEL FONDO</td>
+									<td>SALDO DISPONIBLE</td>
+									<td>SALDO DISPONIBLE NETO DE RETENCIÓN DE IMPUESTOS DE ALLIANZ</td>
+									<td>BENEFICIO DEDUCIBILIDADACUMILADO Y RE-INVERTIDO A TASA 12%</td>
+								</tr>
+								<tr>
+									<td colspan="3">Aportaciones Acomuladas a edad de </td>
+									<td>324234234</td>
+									<td colspan="3">Tasa anual proyectada</td>
+									<td>12%</td>
+								</tr>
+								<tr>
+									<td colspan="3">Saldo proyectado a edad de </td>
+									<td>324234234</td>
+									<td colspan="3">Valor acumulado del beneficio fiscal a edad</td>
+									<td>480</td>
+								</tr>
+							</table>
+						</fieldset>
+					</div>
+					<span class="step_nb"></span>
+					<span class="note">Note : you can hit "Enter" to move to next step</span>
+				</div><!--  End Form Steps  -->
+			</div>
+		</div>
+	</div>
 	<script type="text/javascript" src="res/cotizador.js"></script>
 </body>
 </html>

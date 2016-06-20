@@ -47,6 +47,11 @@ h6 {
   font-weight: bolder
 }
 
+fieldset {
+	border: none !important;
+}
+
+/*
 .clearfix:before,
 .clearfix:after {
   content: " ";
@@ -59,11 +64,6 @@ h6 {
 
 .clearfix {
   *zoom: 1;
-}
-
-.wrapper {
-  max-width: 700px;
-  margin: 50px auto;
 }
 
 .back_link {
@@ -81,9 +81,10 @@ h6 {
   vertical-align: middle;
   margin-right: 4px;
 }
+*/
 /*  form steps  */
 
-.steps {
+/*.steps {
   max-width: 500px;
   height: auto;
   margin: 0 auto;
@@ -92,7 +93,7 @@ h6 {
   border: 1px solid #e1e8f2;
   position: relative;
   text-align: center;
-}
+}*
 
 .steps:after {
   content: "";
@@ -105,19 +106,25 @@ h6 {
   left: 50%;
   margin-left: -8px;
 }
+*/
 
-.steps ul li {
-  width: 100%;
-  list-style: none;
+.steps fieldset {
+  /*width: 100%;
+  list-style: none;*/
   display: none;
-  float: left;
+  /*float: left;*/
 }
 
-.steps ul li.current_step {
+.steps fieldset.current_step {
   display: block;
 }
+ /*
+.label_select {
+    top: -1.2rem !important;
+}*/
 
-.steps ul li .text_field {
+/*
+.steps fieldset .text_field {
   display: block;
   width: 60%;
   padding: 15px 20px;
@@ -140,8 +147,9 @@ h6 {
   -o-transition: all .2s linear;
   transition: all .2s linear;
 }
-
-.steps ul li.error .text_field {
+*/
+/*
+.steps fieldset.error  input{
   border: 1px solid #E46B6B;
 }
 
@@ -155,7 +163,7 @@ h6 {
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
-}
+}*/
 
 .steps .note {
   display: inline-block;
@@ -329,10 +337,7 @@ h6 {
     float: none;
     margin: 0;
   }
-  .wrapper {
-    max-width: 660px;
-    margin: 50px 20px;
-  }
+
   .step_nb {
     display: block;
   }

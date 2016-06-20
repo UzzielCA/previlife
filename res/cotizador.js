@@ -7,7 +7,7 @@ $(document).ready(function() {
   var svg_arrow_icon = "17.4,8.7 17.4,8.7 8.7,0 5.9,2.8 14.6,11.5 8.7,17.4 8.8,17.3 5.8,20.1 5.9,20.2 8.7,23 20.2,11.5 20.2,11.5";
 
   //Form steps number
-  var list_elem_count = $("#steps li").length;
+  var list_elem_count = $("#steps fieldset").length;
 
   //Steps navigation position
   var navigation_pos;
@@ -47,18 +47,22 @@ $(document).ready(function() {
       var current_step_idx = $('#navigation li.current_nav').index();
       execute_event(current_step_idx);
     }
-  });
+});{}
 
   //Function to start the animation
   function execute_event(idx) {
     if (!clickable_btn || !$('#navigation li').eq(idx).hasClass('current_nav')) {
       return false;
     }
-
-    if (!validate_form(idx)) {
-      show_error(idx);
-      return false;
-    } else {
+    var inputsValidate = validate_form(idx);
+    var error = 0;
+    for (var i = 0; i < inputsValidate.length; i++) {
+        if (!inputsValidate[i]) {
+            show_error(idx, i);
+            error ++;
+        }
+    }
+    if (error == 0) {
       clickable_btn = false;
       clear_error();
       if (idx < list_elem_count - 1) {
@@ -117,20 +121,53 @@ $(document).ready(function() {
 
   //Function to validte the form
   function validate_form(step_index) {
-    if ($('#steps li input').eq(step_index).val() != '') {
-      return true;
-    } else {
-      return false;
-    }
+      var isPortafolios = $("#steps fieldset.current_step").attr("id");
+      var currentInputs = $('#steps fieldset.current_step input');
+      var valid=[];
+
+      if (isPortafolios == "portafolios") {
+          var sum = 0;
+          for (var i = 0; i < currentInputs.length; i++) {
+              sum += Number($('#steps fieldset.current_step input').eq(i).val());
+          }
+          if (sum == 100) {
+              valid.push(true);
+          } else {
+              valid.push(false);
+          }
+          console.log("sumatoria = ", sum);
+      } else {
+          for (var i = 0; i < currentInputs.length; i++) {
+              if ($('#steps fieldset.current_step input').eq(i).attr('required') == 'required') {
+                  if ($('#steps fieldset.current_step input').eq(i).val() != '') {
+                    valid[i]=true;
+                  } else {
+                    valid[i] = false;
+                  }
+              }
+              if (valid[i] == true) {
+                  if ($('#steps fieldset.current_step input').eq(i).attr('min') != undefined && $('#steps fieldset.current_step input').eq(i).attr('max') != undefined) {
+                      if (Number($('#steps fieldset.current_step input').eq(i).val()) >= Number($('#steps fieldset.current_step input').eq(i).attr('min')) &&
+                          Number($('#steps fieldset.current_step input').eq(i).val()) <= Number($('#steps fieldset.current_step input').eq(i).attr('max'))) {
+                          valid[i] = true;
+                      } else {
+                          valid[i] = false;
+                      }
+                  }
+              }
+          }
+      }
+
+      return valid;
   }
 
   //Function to focus on the form inputs
   function focus_inupt(input_idx) {
-    if ($('#steps li input').length != 0) {
-      $('#steps li input').eq(input_idx).focus();
-    } else {
-      return false;
-    }
+      if ($('#steps fieldset input').length != 0) {
+      //$('#steps fieldset input').eq(input_idx).focus();
+      } else {
+          return false;
+      }
   }
 
   //Function to add navigation
@@ -152,21 +189,59 @@ $(document).ready(function() {
 
   //Function to show the next step
   function next_step(idx) {
-    $('#steps li').eq(idx - 1).removeClass('current_step');
-    $('#steps li').eq(idx).addClass('current_step');
+    $('#steps fieldset').eq(idx - 1).removeClass('current_step');
+    $('#steps fieldset').eq(idx).addClass('current_step');
+    var isResumen = $("#steps fieldset").eq(idx).attr("id");
+    if (isResumen == "resumen") {
+        var plazo = $("#selectPlazo").val();
+        for (var i = 1; i <= plazo; i++) {
+            var tr = document.createElement("tr");
+            for (var j = 0; j < 8; j++) {
+                var td = document.createElement("td");
+                switch (j) {
+                    case 0:
+                        td.textContent = i;
+                        break;
+                    case 1:
+                        td.textContent = Number($("#age").val()) + i;
+                        break;
+                    case 2:
+                        td.textContent = "APORTACIÓN ANUAL";
+                        break;
+                    case 3:
+                        td.textContent = "APORTACIÓN ACOOMULADA";
+                        break;
+                    case 4:
+                        td.textContent = "SALDO DEL FONDO";
+                        break;
+                    case 5:
+                        td.textContent = "SALDO DISPONIBLE";
+                        break;
+                    case 6:
+                        td.textContent = "SALDO DISPONIBLE NETO DE RETENCIÓN DE IMPUESTOS DE ALLIANZ";
+                        break;
+                    case 7:
+                        td.textContent = "BENEFICIO DEDUCIBILIDADACUMILADO Y RE-INVERTIDO A TASA 12%";
+                        break;
+                }
+                tr.appendChild(td);
+            }
+            $("#tableDetalle").append(tr);
+        }
+    }
     update_progress(idx + 1);
   }
 
   //Function to show errors on the form & navigation
-  function show_error(index) {
+  function show_error(index, indexInput) {
     $('#navigation li').eq(index).addClass('error animate');
-    $('#steps li').eq(index).addClass('error');
+    $('#steps fieldset input').eq(indexInput).addClass('invalid');
   }
 
   //Function to clear the errors on the form & navigation
   function clear_error() {
     $('#navigation li').removeClass('error');
-    $('#steps li').removeClass('error');
+    $('#steps fieldset input').removeClass('invalid');
   }
 
   //Function to send the form or show a message
@@ -179,18 +254,20 @@ $(document).ready(function() {
     $('.step_nb').text(idx + '/' + list_elem_count);
   }
 
+  var selectPlazo = document.createElement("select");
+  selectPlazo.id = "selectPlazo";
+  for (var i = 0; i <= 20; i++) {
+      var option = document.createElement("option");
+      option.value = i + 5;
+      option.text = i + 5;
+      selectPlazo.add(option);
+  }
+  $("#divSelectPlazo").append(selectPlazo);
+  $('select').material_select();
 });
 
 /*
 $(document).ready(function() {
-    var selectPlazo = document.createElement("select");
-    for (var i = 0; i <= 20; i++) {
-        var option = document.createElement("option");
-        option.value = i + 5;
-        option.text = i + 5;
-        selectPlazo.add(option);
-    }
-    $("#divSelectPlazo").append(selectPlazo);
-    $('select').material_select();
+
  });
 */
